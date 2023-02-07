@@ -1,5 +1,7 @@
+import MainView from "components/Home/MainView";
+
 const Home = () => {
-  return <div>멋지다 연진아</div>;
+  return <MainView />;
 };
 
 export default Home;
