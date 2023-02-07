@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -5,6 +6,7 @@ const MainView = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [inputValue, setInputValue] = useState<string>("멋지다 연진아~");
   const [fontSize, setFontSize] = useState<number>(16);
+  const [canvasDataUrl, setCanvasDataUrl] = useState<string>();
 
   const updateCanvas = useCallback(() => {
     const canvas = canvasRef.current;
@@ -23,6 +25,8 @@ const MainView = () => {
         ctx.textAlign = "center";
         ctx.fillStyle = "#fff";
         ctx.fillText(inputValue, canvas.width / 2, canvas.height - 20);
+
+        setCanvasDataUrl(canvas.toDataURL());
       };
     }
   }, [fontSize, inputValue]);
@@ -65,6 +69,9 @@ const MainView = () => {
           );
         })}
       </Select>
+      <a href={canvasDataUrl} download={`${inputValue}.png`}>
+        <DownloadLink>다운로드</DownloadLink>
+      </a>
     </Wrap>
   );
 };
@@ -89,7 +96,7 @@ const Canvas = styled.canvas`
   height: 300px;
 `;
 
-const Input = styled.input`
+const style = css`
   width: 100%;
   height: 40px;
 
@@ -103,18 +110,17 @@ const Input = styled.input`
   color: #ccc;
 `;
 
+const Input = styled.input`
+  ${style}
+`;
+
 const Select = styled.select`
-  width: 100%;
-  height: 40px;
+  ${style}
+`;
 
-  appearance: none;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
-  outline: none;
-
-  background-color: #222;
-  color: #ccc;
+const DownloadLink = styled.button`
+  ${style}
+  cursor: pointer;
 `;
 
 export default MainView;
