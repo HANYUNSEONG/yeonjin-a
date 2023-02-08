@@ -12,6 +12,15 @@ export default function App({ Component, pageProps }: AppProps) {
         description="더 글로리 - 멋지다 연진아~ 생성기"
         openGraph={{
           type: "website",
+          images: [
+            {
+              url: "/yeonjin.jpeg",
+              width: 600,
+              height: 300,
+              alt: "멋지다 연진아~",
+              type: "image/jpeg",
+            },
+          ],
         }}
         additionalLinkTags={[
           {
@@ -20,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
           },
         ]}
       />
+
       <Component {...pageProps} />
     </>
   );
