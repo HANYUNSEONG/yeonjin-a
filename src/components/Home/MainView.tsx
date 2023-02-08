@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -51,12 +52,13 @@ const MainView = () => {
 
   return (
     <Wrap>
-      <h1>멋지다 연진아~</h1>
-      <Canvas ref={canvasRef} width={600} height={300} />
+      <img src={canvasDataUrl} alt={`${inputValue}`} />
+      <Canvas ref={canvasRef} width={600} height={300} hidden />
       <Input
         type="text"
         onChange={onChangeTextInput}
         placeholder="대사를 해보세요"
+        defaultValue={inputValue}
       />
       <Select onChange={onChangeFontSelect} value={fontSize}>
         {[...new Array(10)].map((_, i) => {
@@ -86,9 +88,12 @@ const Wrap = styled.div`
 
   row-gap: 1rem;
 
-  color: #ccc;
-
   margin: 5rem auto;
+  padding: 0 1rem;
+
+  img {
+    width: 100%;
+  }
 `;
 
 const Canvas = styled.canvas`
@@ -106,8 +111,9 @@ const style = css`
   border-radius: 0.5rem;
   outline: none;
 
-  background-color: #222;
-  color: #ccc;
+  background-color: #fff;
+  box-shadow: 0 2.5px 0px 0px #dedede;
+  color: #333;
 `;
 
 const Input = styled.input`
@@ -121,6 +127,12 @@ const Select = styled.select`
 const DownloadLink = styled.button`
   ${style}
   cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    transform: translateY(2.5px);
+    box-shadow: none;
+  }
 `;
 
 export default MainView;

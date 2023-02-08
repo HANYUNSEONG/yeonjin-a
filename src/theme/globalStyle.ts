@@ -14,6 +14,6 @@ export const globalStyle = css`
   }
 
   body {
-    background-color: #303030;
+    background-color: #eee;
   }
 `;
